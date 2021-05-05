@@ -25,15 +25,30 @@ public class Match
      * Add(e[])    | O(N)    | O(N(e)) | name: addAll
      * Delete(e[]) | O(N)    | O(N)    | name: removeAll
      */
-    private LinkedList<Entity> entities;
+    private LinkedList<Entity> entities = new LinkedList();
     
     public void tick()
     {
-        
+        for(Entity entity : entities)
+        {
+            entity.tick();
+        }
     }
     
     public void render(Graphics g)
     {
-        
+        for(Entity entity : entities)
+        {
+            entity.render(g);
+        }
+    }
+    
+    public Entity addEntity(Entity entity)
+    {
+        if(entities.add(entity))
+        {
+            return entity;
+        }
+        return null;
     }
 }

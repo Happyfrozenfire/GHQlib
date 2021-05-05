@@ -9,6 +9,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import net.garrisonhq.ghqlib.debug.DebugEntity;
 import net.garrisonhq.ghqlib.engine.Match;
 import net.garrisonhq.ghqlib.util.Window;
 
@@ -106,7 +107,10 @@ public abstract class Game extends Canvas implements Runnable
     
     
     
-    public abstract void tick();
+    public void tick()
+    {
+        match.tick();
+    }
     
     public final void fullRender()
     {
@@ -128,7 +132,10 @@ public abstract class Game extends Canvas implements Runnable
         bs.show();
     }
     
-    public abstract void render(Graphics g);
+    public void render(Graphics g)
+    {
+        match.render(g);
+    }
     
     public String debug()
     {
@@ -143,19 +150,7 @@ public abstract class Game extends Canvas implements Runnable
             @Override
             public void start() 
             {
-                
-            }
-
-            @Override
-            public void tick() 
-            {
-                
-            }
-            
-            @Override
-            public void render(Graphics g)
-            {
-                
+                match.addEntity(new DebugEntity(100, 100));
             }
         };
     }
