@@ -9,6 +9,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import net.garrisonhq.ghqlib.engine.Match;
 import net.garrisonhq.ghqlib.util.Window;
 
 /**
@@ -18,14 +19,17 @@ import net.garrisonhq.ghqlib.util.Window;
 public abstract class Game extends Canvas implements Runnable
 {
     public static final double FPS = 60;
+    public static Game INSTANCE;
     
     private Thread thread;
     private boolean running = false;
     public int WINDOW_WIDTH;
     public int WINDOW_HEIGHT;
+    public Match match;
     
     public Game(int width, int height, String title)
     {
+        INSTANCE = this;
         WINDOW_WIDTH = width;
         WINDOW_HEIGHT = height;
         
@@ -73,6 +77,8 @@ public abstract class Game extends Canvas implements Runnable
     
     public final synchronized void startFromWindow()
     {
+        match = new Match();
+        
         this.start();
         
         running = true;
