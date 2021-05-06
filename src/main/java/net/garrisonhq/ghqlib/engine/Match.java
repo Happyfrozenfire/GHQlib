@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author gusjg
  */
-public class Match 
+public class Match implements GameTickable
 {
     /**
      * The list of entities that gets ticked every frame.
@@ -27,12 +27,16 @@ public class Match
      */
     private LinkedList<Entity> entities = new LinkedList();
     
+    public HitboxHandler hitboxHandler = new HitboxHandler();
+    
     public void tick()
     {
         for(Entity entity : entities)
         {
             entity.tick();
         }
+        
+        hitboxHandler.tick();
     }
     
     public void render(Graphics g)
@@ -41,6 +45,8 @@ public class Match
         {
             entity.render(g);
         }
+        
+        hitboxHandler.render(g);
     }
     
     public Entity addEntity(Entity entity)

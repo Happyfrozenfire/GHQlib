@@ -9,7 +9,8 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import net.garrisonhq.ghqlib.debug.DebugEntity;
+import net.garrisonhq.ghqlib.engine.GameTickable;
+import net.garrisonhq.ghqlib.example.ExampleEntity;
 import net.garrisonhq.ghqlib.engine.Match;
 import net.garrisonhq.ghqlib.util.Window;
 
@@ -17,7 +18,7 @@ import net.garrisonhq.ghqlib.util.Window;
  *
  * @author gusjg
  */
-public abstract class Game extends Canvas implements Runnable
+public abstract class Game extends Canvas implements Runnable, GameTickable
 {
     public static final double FPS = 60;
     public static Game INSTANCE;
@@ -26,7 +27,7 @@ public abstract class Game extends Canvas implements Runnable
     private boolean running = false;
     public int WINDOW_WIDTH;
     public int WINDOW_HEIGHT;
-    public Match match;
+    public GameTickable handler;
     
     public Game(int width, int height, String title)
     {
@@ -78,7 +79,7 @@ public abstract class Game extends Canvas implements Runnable
     
     public final synchronized void startFromWindow()
     {
-        match = new Match();
+        handler = new Match();
         
         this.start();
         
@@ -107,9 +108,10 @@ public abstract class Game extends Canvas implements Runnable
     
     
     
+    @Override
     public void tick()
     {
-        match.tick();
+        handler.tick();
     }
     
     public final void fullRender()
@@ -132,26 +134,14 @@ public abstract class Game extends Canvas implements Runnable
         bs.show();
     }
     
+    @Override
     public void render(Graphics g)
     {
-        match.render(g);
+        handler.render(g);
     }
     
     public String debug()
     {
         return "";
-    }
-    
-    public static void main(String[] args)
-    {
-        System.out.println("Hello world");
-        new Game(640, 640 * 9 / 12, "New Game")
-        {
-            @Override
-            public void start() 
-            {
-                match.addEntity(new DebugEntity(100, 100));
-            }
-        };
     }
 }

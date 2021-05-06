@@ -11,7 +11,7 @@ import java.awt.Graphics;
  *
  * @author gusjg
  */
-public abstract class Entity 
+public abstract class Entity implements GameTickable
 {
     protected double x;
     protected double y;
@@ -34,11 +34,38 @@ public abstract class Entity
         this.yVel = yVel;
     }
     
+    @Override
     public void tick()
     {
         x += xVel;
         y += yVel;
     }
     
-    public abstract void render(Graphics g);
+    public void collision(String type, Object[] args)
+    {
+        switch(type)
+        {
+            case "SolidCollision":
+                double diffx = (double)args[0];
+                double diffy = (double)args[1];
+                Hitbox solid = (Hitbox)args[2];
+                solidCollision(diffx, diffy, solid);
+                break;
+        }
+    }
+    
+    protected void solidCollision(double diffx, double diffy, Hitbox solid)
+    {
+        if(Math.abs(diffx) > Math.abs(diffy))
+        {
+            y += diffy;
+            yVel = 0;
+        }
+        else
+        {
+            x += diffx;
+            xVel = 0;
+        }
+        System.out.println("h");
+    }
 }

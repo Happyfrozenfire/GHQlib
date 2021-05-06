@@ -1,6 +1,11 @@
-net\garrisonhq\ghqlib\Game$1.class
+net\garrisonhq\ghqlib\example\ExampleEntity.class
+net\garrisonhq\ghqlib\example\ExampleMain.class
 net\garrisonhq\ghqlib\util\Window.class
-net\garrisonhq\ghqlib\debug\DebugEntity.class
+net\garrisonhq\ghqlib\engine\hitbox\SolidCollision.class
+net\garrisonhq\ghqlib\engine\Match.class
+net\garrisonhq\ghqlib\engine\HitboxInteraction.class
+net\garrisonhq\ghqlib\engine\GameTickable.class
+net\garrisonhq\ghqlib\engine\Hitbox.class
+net\garrisonhq\ghqlib\engine\HitboxHandler.class
 net\garrisonhq\ghqlib\engine\Entity.class
 net\garrisonhq\ghqlib\Game.class
-net\garrisonhq\ghqlib\engine\Match.class
