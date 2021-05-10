@@ -13,6 +13,15 @@ import java.awt.Graphics;
  */
 public interface GameTickable 
 {
+    /**
+     * Runs each frame to handle game logic.
+     */
     public abstract void tick();
+    
+    /**
+     * Runs each frame to handle rendering. May be skipped. Game logic should
+     * never be put here.
+     * @param g The {@link java.awt.Graphics} instance to draw on.
+     */
     public abstract void render(Graphics g);
 }
