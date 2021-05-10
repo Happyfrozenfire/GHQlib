@@ -119,6 +119,5 @@ public abstract class Entity implements GameTickable
             x += diffx;
             xVel = 0;
         }
-        System.out.println("h");
     }
 }

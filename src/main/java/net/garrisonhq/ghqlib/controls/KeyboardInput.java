@@ -56,4 +56,12 @@ public class KeyboardInput extends KeyAdapter
     {
         return inputMap;
     }
+    
+    /**
+     * @return {@link #controls}
+     */
+    public ControlsObject getControls()
+    {
+        return controls;
+    }
 }

@@ -5,8 +5,6 @@
  */
 package net.garrisonhq.ghqlib.controls;
 
-import java.math.BigInteger;
-
 /**
  * This class stores three {@link java.lang.Number} instances representing the 
  * controls. They should be treated as binary arrays and operated on using
@@ -182,6 +180,18 @@ public abstract class ControlsObject
      */
     public abstract void setControls(Number pressedControls, Number heldControls);
     
+    /**
+     * Returns a new 2D array of booleans. The first dimension is pressed/held
+     * controls. The second dimension is the bit and should be overridden by
+     * subclasses.
+     * 
+     * @return a new 2D array of pressed and held controls.
+     */
+    public boolean[][] toBoolArr()
+    {
+        return new boolean[2][0];
+    }
+    
     
     
     /**
@@ -275,6 +285,21 @@ public abstract class ControlsObject
             prevControls = controls.byteValue() & ~pressedControls.byteValue();
             preControls = controls;
         }
+        
+        @Override
+        public boolean[][] toBoolArr()
+        {
+            boolean[][] arr = new boolean[2][8];
+            byte pressed = getPressedControls().byteValue();
+            byte held = getHeldControls().byteValue();
+            for(int i = 0; i < 8; i++)
+            {
+                arr[0][i] = (0b1 << i) == (pressed & (0b1 << i));
+                arr[1][i] = (0b1 << i) == (held & (0b1 << i));
+            }
+            
+            return arr;
+        }
     }
     
     /**
@@ -366,6 +391,21 @@ public abstract class ControlsObject
             controls = heldControls.shortValue() | pressedControls.shortValue();
             prevControls = controls.shortValue() & ~pressedControls.shortValue();
             preControls = controls;
+        }
+        
+        @Override
+        public boolean[][] toBoolArr()
+        {
+            boolean[][] arr = new boolean[2][16];
+            short pressed = getPressedControls().shortValue();
+            short held = getHeldControls().shortValue();
+            for(int i = 0; i < 16; i++)
+            {
+                arr[0][i] = (0b1 << i) == (pressed & (0b1 << i));
+                arr[1][i] = (0b1 << i) == (held & (0b1 << i));
+            }
+            
+            return arr;
         }
     }
     
@@ -459,6 +499,21 @@ public abstract class ControlsObject
             prevControls = controls.intValue() & ~pressedControls.intValue();
             preControls = controls;
         }
+        
+        @Override
+        public boolean[][] toBoolArr()
+        {
+            boolean[][] arr = new boolean[2][32];
+            int pressed = getPressedControls().intValue();
+            int held = getHeldControls().intValue();
+            for(int i = 0; i < 32; i++)
+            {
+                arr[0][i] = (0b1 << i) == (pressed & (0b1 << i));
+                arr[1][i] = (0b1 << i) == (held & (0b1 << i));
+            }
+            
+            return arr;
+        }
     }
     
     /**
@@ -550,6 +605,21 @@ public abstract class ControlsObject
             controls = heldControls.longValue() | pressedControls.longValue();
             prevControls = controls.longValue() & ~pressedControls.longValue();
             preControls = controls;
+        }
+        
+        @Override
+        public boolean[][] toBoolArr()
+        {
+            boolean[][] arr = new boolean[2][64];
+            long pressed = getPressedControls().longValue();
+            long held = getHeldControls().longValue();
+            for(int i = 0; i < 64; i++)
+            {
+                arr[0][i] = (0b1 << i) == (pressed & (0b1 << i));
+                arr[1][i] = (0b1 << i) == (held & (0b1 << i));
+            }
+            
+            return arr;
         }
     }
 }

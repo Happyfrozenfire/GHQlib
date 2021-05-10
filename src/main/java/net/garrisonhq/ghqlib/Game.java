@@ -9,6 +9,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import net.garrisonhq.ghqlib.controls.KeyboardInput;
 import net.garrisonhq.ghqlib.engine.GameTickable;
 import net.garrisonhq.ghqlib.example.ExampleEntity;
 import net.garrisonhq.ghqlib.engine.Match;
@@ -28,6 +29,7 @@ public abstract class Game extends Canvas implements Runnable, GameTickable
     public int WINDOW_WIDTH;
     public int WINDOW_HEIGHT;
     public GameTickable handler;
+    public KeyboardInput[] inputArr;
     
     public Game(int width, int height, String title)
     {
@@ -111,6 +113,16 @@ public abstract class Game extends Canvas implements Runnable, GameTickable
     @Override
     public void tick()
     {
+        //tick inputArr
+        for(KeyboardInput input : inputArr)
+        {
+            if(input != null)
+            {
+                input.getControls().update();
+            }
+        }
+        
+        //tick game logic
         handler.tick();
     }
     

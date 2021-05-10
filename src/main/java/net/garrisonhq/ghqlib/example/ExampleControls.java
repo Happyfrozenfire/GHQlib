@@ -47,4 +47,19 @@ public class ExampleControls extends ControlsObject.Byte
     {
         super(pressedControls, heldControls);
     }
+    
+    @Override
+    public boolean[][] toBoolArr()
+    {
+        boolean[][] arr = new boolean[2][4];
+        byte pressed = getPressedControls().byteValue();
+        byte held = getHeldControls().byteValue();
+        for(int i = 0; i < 4; i++)
+        {
+            arr[0][i] = (0b1 << i) == (pressed & (0b1 << i));
+            arr[1][i] = (0b1 << i) == (held & (0b1 << i));
+        }
+
+        return arr;
+    }
 }
