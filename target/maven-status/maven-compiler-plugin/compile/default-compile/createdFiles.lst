@@ -1,6 +1,8 @@
 net\garrisonhq\ghqlib\example\ExampleEntity.class
 net\garrisonhq\ghqlib\example\ExampleMain.class
 net\garrisonhq\ghqlib\controls\ControlsObject.class
+org\stackoverflow\alexorzechowski\GifReader.class
+org\stackoverflow\alexorzechowski\ImageFrame.class
 net\garrisonhq\ghqlib\engine\hitbox\SolidCollision.class
 net\garrisonhq\ghqlib\engine\GameTickable.class
 net\garrisonhq\ghqlib\engine\Hitbox.class
@@ -17,3 +19,4 @@ net\garrisonhq\ghqlib\controls\ControlsObject$Integer.class
 net\garrisonhq\ghqlib\engine\HitboxInteraction.class
 net\garrisonhq\ghqlib\controls\ControlsObject$Long.class
 net\garrisonhq\ghqlib\controls\KeyboardInput.class
+net\garrisonhq\ghqlib\util\Animation.class

@@ -8,6 +8,8 @@ package net.garrisonhq.ghqlib.example;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
+import java.io.File;
+import java.net.URL;
 import net.garrisonhq.ghqlib.Game;
 import net.garrisonhq.ghqlib.controls.KeyboardInput;
 import net.garrisonhq.ghqlib.engine.Match;
