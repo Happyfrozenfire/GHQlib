@@ -81,8 +81,6 @@ public abstract class Game extends Canvas implements Runnable, GameTickable
     
     public final synchronized void startFromWindow()
     {
-        handler = new Match();
-        
         this.start();
         
         running = true;

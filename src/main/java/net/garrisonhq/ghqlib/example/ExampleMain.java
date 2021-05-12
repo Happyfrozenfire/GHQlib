@@ -37,7 +37,8 @@ public class ExampleMain extends Game
         inputArr[0].getInputMap().put(KeyEvent.VK_DOWN, ExampleControls.DOWN);
         inputArr[0].getInputMap().put(KeyEvent.VK_LEFT, ExampleControls.LEFT);
         inputArr[0].getInputMap().put(KeyEvent.VK_RIGHT, ExampleControls.RIGHT);
-        Match match = getMatch();
+        Match match = new Match();
+        handler = match;
         match.addEntity(new ExampleEntity(100, 100));
         match.addEntity(new ExampleEntity(new Rectangle2D.Double(0, 0, 40, 40), 1, 2, Color.GREEN));
         match.addEntity(new ExampleEntity(new Rectangle2D.Double(0, 400, 1000, 1000), 0, 0, Color.MAGENTA));
