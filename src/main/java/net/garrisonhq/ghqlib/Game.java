@@ -21,17 +21,49 @@ import net.garrisonhq.ghqlib.util.Window;
  */
 public abstract class Game extends Canvas implements Runnable, GameTickable
 {
+    /**
+     * The amount of times {@link #tick()} should run per second.
+     */
     public static final double FPS = 60;
+    
+    /**
+     * The current game instance.
+     */
     public static Game INSTANCE;
     
     private Thread thread;
     private boolean running = false;
+    
+    /**
+     * The int that tells us the window width. Considering changing this to a 
+     * getter.
+     */
     public int WINDOW_WIDTH;
+    
+    /**
+     * The int that tells us the window height. Considering changing this to a
+     * getter.
+     */
     public int WINDOW_HEIGHT;
+    
+    /**
+     * The reference to the current handler.
+     */
     public GameTickable handler;
+    
+    /**
+     * The reference to all the current input objects.
+     */
     public KeyboardInput[] inputArr;
     
-    public Game(int width, int height, String title)
+    /**
+     * Constructs a new Game/Window instance.
+     * 
+     * @param width
+     * @param height
+     * @param title 
+     */
+    protected Game(int width, int height, String title)
     {
         INSTANCE = this;
         WINDOW_WIDTH = width;
@@ -41,7 +73,7 @@ public abstract class Game extends Canvas implements Runnable, GameTickable
     }
     
     @Override
-    public void run() 
+    public final void run() 
     {
         long lastTime = System.nanoTime();
         double amountOfTicks = FPS;
@@ -69,8 +101,7 @@ public abstract class Game extends Canvas implements Runnable, GameTickable
             timer += 1000;
             
             String debugStatement = "DEBUG: " + "\n";
-            debugStatement += "TPS: " + frames + "\n";
-            debugStatement += this.debug();
+            debugStatement += "FPS: " + frames;
             
             System.out.println(debugStatement);
             frames = 0;
@@ -79,6 +110,9 @@ public abstract class Game extends Canvas implements Runnable, GameTickable
         stop();
     }
     
+    /**
+     * Is called from Window. Do not call this anywhere else.
+     */
     public final synchronized void startFromWindow()
     {
         this.start();
@@ -89,9 +123,14 @@ public abstract class Game extends Canvas implements Runnable, GameTickable
         this.requestFocus();
     }
     
+    /**
+     * Should be overridden to create the input array, handler, etc.
+     */
     public abstract void start();
     
-    
+    /**
+     * Use this to end the program.
+     */
     @SuppressWarnings("CallToPrintStackTrace")
     public synchronized void stop()
     {
@@ -107,7 +146,10 @@ public abstract class Game extends Canvas implements Runnable, GameTickable
     }
     
     
-    
+    /**
+     * Don't override this unless you're clever. Instead, create a new GameTickable
+     * implementation and use that.
+     */
     @Override
     public void tick()
     {
@@ -124,6 +166,9 @@ public abstract class Game extends Canvas implements Runnable, GameTickable
         handler.tick();
     }
     
+    /**
+     * Renders the current graphics.
+     */
     public final void fullRender()
     {
         BufferStrategy bs = this.getBufferStrategy();
@@ -144,14 +189,15 @@ public abstract class Game extends Canvas implements Runnable, GameTickable
         bs.show();
     }
     
+    /**
+     * Don't override this unless you're clever. Instead, create a new GameTickable
+     * implementation and use that.
+     * 
+     * @param g 
+     */
     @Override
     public void render(Graphics g)
     {
         handler.render(g);
-    }
-    
-    public String debug()
-    {
-        return "";
     }
 }
