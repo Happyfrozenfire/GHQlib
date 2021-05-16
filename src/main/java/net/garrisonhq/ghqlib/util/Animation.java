@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import org.stackoverflow.alexorzechowski.GifReader;
 import org.stackoverflow.alexorzechowski.ImageFrame;
 
@@ -24,16 +25,27 @@ public class Animation
     
     public Animation(Collection<ImageFrame> frames)
     {
+        this(frames, 1);
+    }
+    
+    public Animation(ImageFrame[] frames)
+    {
+        this(frames, 1);
+    }
+    
+    public Animation(Collection<ImageFrame> frames, double delayMultiplier)
+    {
         ArrayList<ImageFrame> frameList = new ArrayList();
         for(ImageFrame frame : frames)
         {
-            if(frame.getDelay() <= 1)
+            int delay = (int)(frame.getDelay() * delayMultiplier);
+            if(delay <= 1)
             {
                 frameList.add(frame);
             }
             else
             {
-                for(int i = 0; i < frame.getDelay(); i++)
+                for(int i = 0; i < delay; i++)
                 {
                     frameList.add(frame);
                 }
@@ -43,12 +55,12 @@ public class Animation
         this.frameArr = frameList.toArray(new ImageFrame[frameList.size()]);
     }
     
-    public Animation(ImageFrame[] frames)
+    public Animation(ImageFrame[] frames, double delayMultiplier)
     {
-        ArrayList<ImageFrame> frameList = new ArrayList();
+        LinkedList<ImageFrame> frameList = new LinkedList();
         for(ImageFrame frame : frames)
         {
-            int delay = (int)(frame.getDelay() * 0.6);
+            int delay = (int)(frame.getDelay() * delayMultiplier);
             if(delay <= 1)
             {
                 frameList.add(frame);
@@ -78,5 +90,10 @@ public class Animation
     public static Animation fromGif(InputStream stream) throws IOException
     {
         return new Animation(GifReader.readGif(stream));
+    }
+    
+    public static Animation fromGif(InputStream stream, double delayMultiplier) throws IOException
+    {
+        return new Animation(GifReader.readGif(stream), delayMultiplier);
     }
 }
